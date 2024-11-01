@@ -1,0 +1,14 @@
+services:
+  mysql:
+    image: mysql:8.0.33
+    ports:
+      - 13306:3306
+    volumes:
+      - ${DB_INIT_FILE}:/docker-entrypoint-initdb.d
+    command:
+      - '--character-set-server=utf8mb4'    # 데이터베이스 서버의 기본 문자 집합을 utf8mb4로 설정하여, 이모지와 같은 특수 문자를 지원
+      - '--collation-server=utf8mb4_unicode_ci'     # 문자 집합의 정렬 기준, 언어 및 지역별로 정렬이 다르게 나타날 수 있도록 지정
+      - '--lower_case_table_names=1'    # 테이블 이름을 소문자로 처리하여 대소문자 구분 없이 테이블 이름을 사용
+    environment:
+      MYSQL_ROOT_PASSWORD: wanted
+      MYSQL_DATABASE: wanted_preonboarding
